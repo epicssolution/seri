@@ -127,9 +127,9 @@ const Header = () => {
         Marketing
       </Link>
 
-      <Link href="/hel" className="my-2">
-        Health
-      </Link>
+      <Link href="/ai" className="my-2">
+            Artificial Intelligience
+          </Link>
 
           <button
             onClick={() => setMode(mode === "light" ? "dark" : "light")}
@@ -166,8 +166,8 @@ const Header = () => {
             Marketing
           </Link>
 
-          <Link href="/hel" className="my-2">
-            Health
+          <Link href="/ai" className="my-2">
+            Artificial Intelligience
           </Link>
           <button
             onClick={() => setMode(mode === "light" ? "dark" : "light")}

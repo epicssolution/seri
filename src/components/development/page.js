@@ -7,14 +7,14 @@ import { client } from "@/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image";
 import Head from "next/head"; // Importing Head component
 
-const UniComponent1 = () => {
+const Development = () => {
   const [universities, setUniversities] = useState([]);
 
   useEffect(() => {
     // Fetch data from Sanity
     const fetchData = async () => {
       const query = `
-        *[_type=="dev"]{
+        *[_type=="development"]{
           description,
           "slug": slug.current,
           image,
@@ -40,17 +40,17 @@ const UniComponent1 = () => {
     <main className="w-full mt-16 sm:mt-24 md:mt-32 px-5 sm:px-10 md:px-24 lg:px-32 flex flex-col items-center justify-center">
       {/* Adding dynamic Open Graph meta tags */}
       <Head>
-        <title>Online Courses| Epics solution</title>
+        <title>online Courses |Development</title>
         <meta
           name="description"
-          content="Explore Courses and their detailed information."
+          content="Explore new courses"
         />
 
         {/* Open Graph tags */}
         <meta property="og:title" content="Online Courses| Epics solution" />
         <meta
           property="og:description"
-          content="Explore universities and their detailed information on Galaxy Education."
+          content="Explore Courses and their detailed information on Epics solution."
         />
         <meta
           property="og:image"
@@ -58,7 +58,7 @@ const UniComponent1 = () => {
         />
         <meta
           property="og:url"
-          content="https://www.epicssolution.com/"
+          content="https://www.epicssolution.com/university"
         />
         <meta property="og:type" content="website" />
 
@@ -83,7 +83,7 @@ const UniComponent1 = () => {
             className="group flex flex-col items-center text-dark dark:text-light mb-8"
           >
             <Link
-              href={`/marketing/${uni.slug}`}
+              href={`/development/${uni.slug}`}
               className="h-full rounded-xl overflow-hidden"
             >
               {uni.image && (
@@ -104,7 +104,7 @@ const UniComponent1 = () => {
                   {uni.tags[0]}
                 </span>
               )}
-              <Link href={`/marketing/${uni.slug}`} className="inline-block my-1">
+              <Link href={`/development/${uni.slug}`} className="inline-block my-1">
                 <h2 className="font-semibold capitalize text-base sm:text-lg">
                   <span
                     className="bg-gradient-to-r from-accent/50 to-accent/50 dark:from-accentDark/50 dark:to-accentDark/50
@@ -132,4 +132,4 @@ const UniComponent1 = () => {
   );
 };
 
-export default UniComponent1;
+export default Development;

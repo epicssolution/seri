@@ -9,12 +9,7 @@ const BlogDetails = ({ blog }) => {
       <div className="m-3 font-bold">{blog.title || 'Untitled'}</div>
 
     
-      {/* Display the link */}
-      {blog.href && (
-        <Link href={blog.href} className="m-3 text-blue-500 underline">
-          Read More
-        </Link>
-      )}
+ 
 
       
     </div>

@@ -13,7 +13,7 @@ export async function generateMetadata({ params }) {
 
   // Fetch the blog data from Sanity for the "dev" type
   const query = `
-    *[_type == "dev" && slug.current == $slug][0]{
+    *[_type == "Eng" && slug.current == $slug][0]{
       title,
       description,
       "slug": slug.current,
@@ -38,7 +38,7 @@ export async function generateMetadata({ params }) {
     openGraph: {
       title: blog.title,
       description: blog.description,
-      url: `https://www.epicssolution.com/marketing/${slug}`,
+      url: `https://www.epicssolution.com/Engineering/${slug}`,
       images: imageUrl ? [{ url: imageUrl }] : [],
       type: 'article',
     },
@@ -61,7 +61,7 @@ export default async function BlogPage({ params }) {
 
   // Fetch the blog data from Sanity
   const query = `
-    *[_type == "dev" && slug.current == $slug][0]{
+    *[_type == "Eng" && slug.current == $slug][0]{
       title,
       description,
       "slug": slug.current,

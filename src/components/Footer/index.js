@@ -17,10 +17,10 @@ const Footer = () => {
   return (
     <footer className="mt-16 rounded-2xl bg-dark dark:bg-accentDark/90 m-2 sm:m-10 flex flex-col items-center text-light dark:text-dark">
       <h3 className="mt-16 font-medium dark:font-bold text-center capitalize text-2xl sm:text-3xl lg:text-4xl px-4">
-        Education Consultant | Universities | Courses
+       Online Courses | udemy | Courses
       </h3>
       <p className="mt-5 px-4 text-center w-full sm:w-3/5 font-light dark:font-medium text-sm sm:text-base">
-      Stay ahead in technology! Join our community of over 5,000 members and be the first to receive the latest updates and insights.
+      Educate yourself and lead the word. Enroll in best courses of every field.
       </p>
 
       <form
@@ -48,7 +48,7 @@ const Footer = () => {
 
       <div className="w-full  mt-16 md:mt-24 relative font-medium border-t border-solid border-light py-6 px-8 flex  flex-col md:flex-row items-center justify-between">
         <span className="text-center">
-          &copy;Education Consultant.
+          &copy;Professional Courses.
         </span>
         <Link
           href="https://g.co/kgs/mCZEPTi"
