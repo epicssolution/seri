@@ -11,7 +11,7 @@ import { PortableText } from "next-sanity";
 export async function generateMetadata({ params }) {
   const { slug } = params;
 
-  // Fetch the blog data from Sanity for the "dev" type
+  // Fetch the blog data from Sanity for the "AI" type
   const query = `
     *[_type == "AI" && slug.current == $slug][0]{
       title,
@@ -99,6 +99,7 @@ export default async function BlogPage({ params }) {
     headings.push({ text: blog.heading4, slug: "heading-4", level: "4" });
   }
 
+  // Additional Headings from Content
   if (blog.content && Array.isArray(blog.content)) {
     blog.content
       .filter((block) => block.style && block.style.match(/^h[1-6]$/))
@@ -113,80 +114,71 @@ export default async function BlogPage({ params }) {
       });
   }
 
-  // Render the page content
+  // Render the blog content
   return (
-    <article>
-      <div className="mb-8 text-center relative w-full h-[70vh] bg-gray-800">
+    <article className="py-12 px-4 sm:px-10 lg:px-20 bg-light dark:bg-dark">
+      {/* Hero Section */}
+      <div className="mb-8 text-center relative w-full h-[70vh] bg-gray-900">
         <div className="w-full z-10 flex flex-col items-center justify-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-          <h1 className="inline-block mt-6 font-semibold capitalize text-white text-2xl md:text-2xl lg:text-2xl !leading-normal relative w-5/6">
-            <VisitCourseButton href={blog.href} />
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold capitalize text-white">
+            {blog.title}
           </h1>
+          <VisitCourseButton href={blog.href} className="mt-6" />
         </div>
         <div className="absolute top-0 left-0 right-0 bottom-0 h-full bg-gray-800/60" />
         {blog.image && (
           <Image
             src={urlFor(blog.image).url()}
             alt={blog.title}
-            fill
-            className="aspect-square w-full h-full object-cover object-center"
+            layout="fill"
+            className="object-cover object-center"
             priority
-            sizes="100vw"
           />
         )}
       </div>
 
-      <BlogDetails blog={blog} slug={params.slug} toc={headings} />
+      {/* Blog Content and TOC */}
+      <div className="grid grid-cols-12 gap-6 lg:gap-10">
+        {/* Table of Contents */}
+        <aside className="col-span-12 lg:col-span-4 border-[1px] border-dark dark:border-light rounded-lg p-4 sticky top-6 max-h-[80vh] overflow-y-auto">
+          <h2 className="text-lg font-semibold mb-4 text-dark dark:text-light">Table of Contents</h2>
+          <ul className="space-y-4">
+            {headings.length > 0 ? (
+              headings.map((heading) => (
+                <li key={heading.slug}>
+                  <a
+                    href={`#${heading.slug}`}
+                    className={`text-sm sm:text-base text-dark dark:text-light hover:underline`}
+                  >
+                    {heading.text}
+                  </a>
+                </li>
+              ))
+            ) : (
+              <li className="text-gray-500">No content available</li>
+            )}
+          </ul>
+        </aside>
 
-      <div className="grid grid-cols-12 gap-y-8 lg:gap-8 sxl:gap-16 mt-8 px-5 md:px-10">
-        <div className="col-span-12 lg:col-span-4">
-          <details
-            className="border-[1px] border-solid border-dark dark:border-light text-black dark:text-light rounded-lg p-4 sticky top-6 max-h-[80vh] overflow-hidden overflow-y-auto"
-            open
-          >
-            <summary className="text-lg font-semibold capitalize cursor-pointer">
-              Table Of Contents
-            </summary>
-            <ul className="mt-4 font-in text-base">
-              {headings.length > 0 ? (
-                headings.map((heading) => (
-                  <li key={heading.slug} className="py-1">
-                    <a
-                      href={`#${heading.slug}`}
-                      data-level={heading.level}
-                      className={`data-[level="1"]:pl-0 data-[level="2"]:pl-4
-                                  data-[level="2"]:border-t border-solid border-dark/40
-                                  data-[level="3"]:pl-8
-                                  data-[level="4"]:pl-12
-                                  flex items-center justify-start
-                                  hover:text-blue-500`}
-                    >
-                      {heading.level === "3" && (
-                        <span className="flex w-1 h-1 rounded-full bg-dark dark:bg-light mr-2">
-                          &nbsp;
-                        </span>
-                      )}
-                      {heading.level === "4" && (
-                        <span className="flex w-1 h-1 rounded-full bg-dark dark:bg-light mr-3">
-                          &nbsp;
-                        </span>
-                      )}
-                      <span className="hover:underline">{heading.text}</span>
-                    </a>
-                  </li>
-                ))
-              ) : (
-                <li>No content available</li>
-              )}
-            </ul>
-          </details>
-        </div>
-        <div className="col-span-12 lg:col-span-8 border-dark dark:border-light text-black dark:text-light">
+        {/* Blog Details */}
+        <section className="col-span-12 lg:col-span-8 text-dark dark:text-light">
           {blog.content ? (
-            <PortableText value={blog.content} />
+            <PortableText value={blog.content} components={{
+              types: {
+                block: ({ children, node }) => {
+                  const Tag = `h${node.level || 1}`;
+                  return (
+                    <Tag className="font-semibold text-2xl lg:text-3xl mt-6 mb-4">
+                      {children}
+                    </Tag>
+                  );
+                },
+              },
+            }} />
           ) : (
             <p>No content available</p>
           )}
-        </div>
+        </section>
       </div>
     </article>
   );

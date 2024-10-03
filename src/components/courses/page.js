@@ -22,12 +22,8 @@ const UniComponent1 = () => {
           href,
           tags,
           content,
-          heading1,
-          heading2,
-          heading4,
-          heading4,
           publishedAt
-        }
+        
       `;
       const result = await client.fetch(query);
       setUniversities(result);

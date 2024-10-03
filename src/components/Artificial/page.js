@@ -22,10 +22,6 @@ const Artificial = () => {
           href,
           tags,
           content,
-          heading1,
-          heading2,
-          heading4,
-          heading4,
           publishedAt
         }
       `;
