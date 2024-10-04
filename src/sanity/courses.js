@@ -11,7 +11,30 @@ export const coursesType = defineType({
       title: 'Post Title',
       validation: (Rule) => Rule.required(),
     }),
-    
+    defineField({
+      name: 'heading1',
+      type: 'string',
+      title: 'Heading 1',
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'heading2',
+      type: 'string',
+      title: 'Heading 2',
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'heading3',
+      type: 'string',
+      title: 'Heading 3',
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'heading4', // Removed space from the field name
+      type: 'string',
+      title: 'Heading 4',
+      validation: (Rule) => Rule.required(),
+    }),
     defineField({
       name: 'slug',
       type: 'slug',
@@ -47,7 +70,7 @@ export const coursesType = defineType({
       title: 'Content',
       name: 'content',
       type: 'array',
-      of: [{type: 'block'}]
+      of: [{ type: 'block' }],
     }),
     defineField({
       name: 'tags',
