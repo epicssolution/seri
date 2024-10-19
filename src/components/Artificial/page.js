@@ -78,22 +78,19 @@ const Artificial = () => {
             key={uni.slug}
             className="group flex flex-col items-center text-dark dark:text-light mb-8"
           >
-            <Link
-              href={`/artificiali/${uni.slug}`}
-              className="h-full rounded-xl overflow-hidden"
-            >
-              {uni.image && (
-                <Image
-                  src={urlFor(uni.image).url()} // Using urlFor to generate the image URL
-                  alt={uni.image.alt || uni.title} // Using alt text if available
-                  width={400}
-                  height={300}
-                  className="aspect-[4/3] w-full h-full object-cover object-center group-hover:scale-105 transition-all ease duration-300"
-                  sizes="(max-width: 440px) 80vw, (max-width: 824px) 30vw, 23vw"
-                />
-              )}
-            </Link>
-
+          <Link href={`/artificiali/${uni.slug}`} className="h-full rounded-xl overflow-hidden">
+  {uni.image && (
+    <Image
+      src={urlFor(uni.image).url()} // Using urlFor to generate the image URL
+      alt={uni.image.alt || uni.title} // Using alt text if available
+      width={400}
+      height={300}
+      className="aspect-[4/3] w-full h-full object-cover object-center group-hover:scale-105 transition-all ease duration-300"
+      sizes="(max-width: 440px) 80vw, (max-width: 824px) 30vw, 23vw"
+      loading="lazy" // Enable lazy loading
+    />
+  )}
+</Link>
             <div className="flex flex-col w-full mt-4">
               {uni.tags && uni.tags.length > 0 && (
                 <span className="uppercase text-accent dark:text-accentDark font-semibold text-xs sm:text-sm">

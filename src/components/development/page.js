@@ -82,21 +82,24 @@ const Development = () => {
             key={uni.slug}
             className="group flex flex-col items-center text-dark dark:text-light mb-8"
           >
-            <Link
-              href={`/development/${uni.slug}`}
-              className="h-full rounded-xl overflow-hidden"
-            >
-              {uni.image && (
-                <Image
-                  src={urlFor(uni.image).url()} // Using urlFor to generate the image URL
-                  alt={uni.image.alt || uni.title} // Using alt text if available
-                  width={400}
-                  height={300}
-                  className="aspect-[4/3] w-full h-full object-cover object-center group-hover:scale-105 transition-all ease duration-300"
-                  sizes="(max-width: 440px) 80vw, (max-width: 824px) 30vw, 23vw"
-                />
-              )}
-            </Link>
+            <Link 
+  href={`/development/${uni.slug}`}
+  className="h-full rounded-xl overflow-hidden"
+>
+  {uni.image && (
+    <Image
+      src={urlFor(uni.image).url()} // Generating image URL
+      alt={uni.image.alt || uni.title} // Alt text for accessibility
+      width={400}
+      height={300}
+      className="aspect-[4/3] w-full h-full object-cover object-center group-hover:scale-105 transition-all ease duration-300"
+      sizes="(max-width: 440px) 80vw, (max-width: 824px) 30vw, 23vw"
+      loading="lazy" // Enable lazy loading
+      placeholder="blur" // Display a blurred placeholder while loading
+      blurDataURL={urlFor(uni.image).url()} // Placeholder image URL
+    />
+  )}
+</Link>
 
             <div className="flex flex-col w-full mt-4">
               {uni.tags && uni.tags.length > 0 && (

@@ -58,7 +58,22 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        {/* You can add additional head elements if needed */}
+
+      <meta
+          name="google-site-verification"
+          content="125c3Cukk3D1INp6HOlRmuvTDPOk-qiR_j30PREvm0I"
+        />
+        {/* Google tag (gtag.js) */}
+        <Script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-D50XE9PL55"
+        />
+        <Script id="gtag-init" strategy="afterInteractive">
+          {`window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-D50XE9PL55');`}
+        </Script>
       </head>
       <body
         className={cx(
@@ -70,12 +85,12 @@ export default function RootLayout({ children }) {
         {/* Theme switcher script for dark/light mode */}
         <Script id="theme-switcher" strategy="beforeInteractive">
           {`if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-    document.documentElement.classList.add('dark')
-  } else {
-    document.documentElement.classList.remove('dark')
-  }`}
+            document.documentElement.classList.add('dark')
+          } else {
+            document.documentElement.classList.remove('dark')
+          }`}
         </Script>
-        
+
         {/* Header and Footer are included around children */}
         <Header />
         <main>{children}</main>

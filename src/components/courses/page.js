@@ -23,7 +23,7 @@ const UniComponent1 = () => {
           tags,
           content,
           publishedAt
-        
+        }
       `;
       const result = await client.fetch(query);
       setUniversities(result);
@@ -36,14 +36,14 @@ const UniComponent1 = () => {
     <main className="w-full mt-16 sm:mt-24 md:mt-32 px-5 sm:px-10 md:px-24 lg:px-32 flex flex-col items-center justify-center">
       {/* Adding dynamic Open Graph meta tags */}
       <Head>
-        <title>Online Courses| Epics solution</title>
+        <title>Online Courses | Epics solution</title>
         <meta
           name="description"
           content="Explore Courses and their detailed information."
         />
 
         {/* Open Graph tags */}
-        <meta property="og:title" content="Online Courses| Epics solution" />
+        <meta property="og:title" content="Online Courses | Epics solution" />
         <meta
           property="og:description"
           content="Explore universities and their detailed information on Galaxy Education."
@@ -52,15 +52,15 @@ const UniComponent1 = () => {
           property="og:image"
           content="https://www.epicssolution.com/path-to-your-default-image.jpg"
         />
-        <meta
-          property="og:url"
-          content="https://www.epicssolution.com/"
-        />
+        <meta property="og:url" content="https://www.epicssolution.com/" />
         <meta property="og:type" content="website" />
 
         {/* Twitter Card tags */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Universities | Galaxy Education" />
+        <meta
+          name="twitter:title"
+          content="Universities | Galaxy Education"
+        />
         <meta
           name="twitter:description"
           content="Explore universities and their detailed information."
@@ -78,21 +78,26 @@ const UniComponent1 = () => {
             key={uni.slug}
             className="group flex flex-col items-center text-dark dark:text-light mb-8"
           >
-            <Link
-              href={`/marketing/${uni.slug}`}
-              className="h-full rounded-xl overflow-hidden"
-            >
-              {uni.image && (
-                <Image
-                  src={urlFor(uni.image).url()} // Using urlFor to generate the image URL
-                  alt={uni.image.alt || uni.title} // Using alt text if available
-                  width={400}
-                  height={300}
-                  className="aspect-[4/3] w-full h-full object-cover object-center group-hover:scale-105 transition-all ease duration-300"
-                  sizes="(max-width: 440px) 80vw, (max-width: 824px) 30vw, 23vw"
-                />
-              )}
-            </Link>
+           <Link
+  href={`/marketing/${uni.slug}`}
+  className="h-full rounded-xl overflow-hidden"
+>
+  {uni.image && (
+    <Image
+      src={urlFor(uni.image).url()} // Generate the image URL
+      alt={uni.image.alt || uni.title} // Use alt text if available
+      width={400}
+      height={300}
+      className="aspect-[4/3] w-full h-full object-cover object-center group-hover:scale-105 transition-all ease duration-300"
+      sizes="(max-width: 440px) 80vw, (max-width: 824px) 30vw, 23vw"
+      loading="lazy" // Enable lazy loading
+      placeholder="blur" // Add blur-up effect for better UX
+      blurDataURL="data:image/jpeg;base64,..." // Add a base64 placeholder (replace with a real base64 image)
+      quality={75} // Adjust image quality for performance
+      priority={false} // Set to false for lower priority images
+    />
+  )}
+</Link>
 
             <div className="flex flex-col w-full mt-4">
               {uni.tags && uni.tags.length > 0 && (
