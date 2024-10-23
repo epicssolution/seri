@@ -59,7 +59,7 @@ const UniComponent1 = () => {
         <meta name="twitter:card" content="summary_large_image" />
         <meta
           name="twitter:title"
-          content="Universities | Galaxy Education"
+          content="Online Courses | Epics solution"
         />
         <meta
           name="twitter:description"

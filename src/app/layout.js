@@ -74,6 +74,7 @@ export default function RootLayout({ children }) {
           gtag('js', new Date());
           gtag('config', 'G-D50XE9PL55');`}
         </Script>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
       <body
         className={cx(

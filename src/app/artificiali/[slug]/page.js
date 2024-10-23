@@ -124,15 +124,22 @@ export default async function BlogPage({ params }) {
         </div>
         <div className="absolute top-0 left-0 right-0 bottom-0 h-full bg-gray-800/60" />
         {blog.image && (
-          <Image
-            src={urlFor(blog.image).url()}
-            alt={blog.title}
-            fill
-            className="aspect-square w-full h-full object-cover object-center"
-            priority
-            sizes="100vw"
-
-          />
+         <Image
+         src={urlFor(blog.image).url()}
+         alt={blog.title}
+         fill
+         className="aspect-square w-full h-full object-cover object-center"
+         
+         sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 33vw" // Adjust based on responsive requirements
+         srcSet={`
+           ${urlFor(blog.image).width(600).url()} 600w,
+           ${urlFor(blog.image).width(1200).url()} 1200w,
+           ${urlFor(blog.image).width(1800).url()} 1800w
+         `}
+         loading="lazy" // Adds lazy loading
+         
+       />
+       
         )}
       </div>
 

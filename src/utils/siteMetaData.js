@@ -1,5 +1,5 @@
 const siteMetadata = {
-  title: 'courses',
+  title: 'Best online Courses',
   author: 'Epics',
   headerTitle: 'Blog',
   description: 'Educational websites help students gain enroll in the best courses.',
@@ -7,7 +7,7 @@ const siteMetadata = {
   theme: 'dark', // system, dark or light
   siteUrl: 'https://www.epicssolution.com/', // your website URL
   siteLogo: '/logo.png',
-  email: 'galaxyconsultant25600@gmail.com',
+  email: 'abdulghaffar25600@gmail.com',
   facebook: 'https://www.facebook.com/EPICS256',
   youtube: 'https://www.youtube.com/@Dharti-256',
   linkedin: 'https://www.linkedin.com/company/mhp-design-engineering',
