@@ -54,10 +54,28 @@ export const metadata = {
   },
 };
 
+
 export default function RootLayout({ children }) {
+  
   return (
     <html lang="en">
       <head>
+      <link rel="sitemap" type="application/xml" href="https://www.epicssolution.com/sitemap.xml" />
+        {/* Open Graph Meta Tags */}
+        <meta property="og:title" content={metadata.openGraph.title} />
+        <meta property="og:description" content={metadata.openGraph.description} />
+        <meta property="og:url" content={metadata.openGraph.url} />
+        <meta property="og:site_name" content={metadata.openGraph.siteName} />
+        <meta property="og:locale" content={metadata.openGraph.locale} />
+        <meta property="og:updated_time" content={metadata.openGraph.updated_time} />
+        <meta property="og:type" content={metadata.openGraph.type} />
+        <meta property="og:image" content={metadata.openGraph.images[0]} />
+
+        {/* Additional Meta Tags */}
+        <meta name="theme-color" content="#ffffff" /> {/* Define theme color for browsers */}
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="last-modified" content={metadata.openGraph.updated_time} />
+
 
       <meta
           name="google-site-verification"
@@ -75,6 +93,8 @@ export default function RootLayout({ children }) {
           gtag('config', 'G-D50XE9PL55');`}
         </Script>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="last-modified" content={metadata.lastModified} />
+
       </head>
       <body
         className={cx(
@@ -94,7 +114,7 @@ export default function RootLayout({ children }) {
 
         {/* Header and Footer are included around children */}
         <Header />
-        <main>{children}</main>
+        <main >{children}</main>
         <Footer />
       </body>
     </html>

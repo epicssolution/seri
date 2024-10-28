@@ -25,7 +25,7 @@ const Header = () => {
   };
 
   return (
-    <>
+    <header>
       {/* Meta tags for SEO */}
       <Head>
         <title>Epics solution | Online courses and blogs</title>
@@ -40,7 +40,7 @@ const Header = () => {
         <meta name="twitter:title" content="Epics solution | Online courses and blogs" />
       </Head>
 
-      <header className="w-full p-4 px-5 sm:px-10 flex items-center justify-between relative z-50">
+      <div className="w-full p-4 px-5 sm:px-10 flex items-center justify-between relative z-50">
         {/* Logo Section */}
         <div className="flex items-center justify-between w-full sm:w-auto">
           <Logo />
@@ -133,8 +133,8 @@ const Header = () => {
             <InstagramIcon className="w-6 h-6 hover:scale-125 transition-all ease duration-200" />
           </a>
         </div>
-      </header>
-    </>
+      </div>
+    </ header>
   );
 };
 

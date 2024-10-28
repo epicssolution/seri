@@ -61,9 +61,94 @@ export const aiType = defineType({
       title: 'Main Content',
       name: 'content',
       type: 'array',
-      description: 'Add the main content of the post here. You can format it using headings, paragraphs, etc.', // Describes the purpose
-      of: [{ type: 'block' }], // Allows rich text formatting
+      description: 'Add the main content of the post here. You can format it using headings, paragraphs, images, links, etc.',
+      of: [
+        {
+          type: 'block',
+          styles: [
+            { title: 'Normal', value: 'normal' },
+            { title: 'Heading 1', value: 'h1' },
+            { title: 'Heading 2', value: 'h2' },
+            { title: 'Heading 3', value: 'h3' },
+            { title: 'Heading 4', value: 'h4' },
+            { title: 'Heading 5', value: 'h5' },
+            { title: 'Heading 6', value: 'h6' },
+          ],
+          lists: [
+            { title: 'Bullet', value: 'bullet' },
+            { title: 'Numbered', value: 'number' },
+          ],
+          marks: {
+            decorators: [
+              { title: 'Bold', value: 'strong' },
+              { title: 'Italic', value: 'em' },
+              { title: 'Underline', value: 'underline' },
+            ],
+            annotations: [
+              {
+                title: 'URL',
+                name: 'link',
+                type: 'object',
+                fields: [
+                  {
+                    title: 'URL',
+                    name: 'href',
+                    type: 'url',
+                  },
+                  {
+                    title: 'Open in New Tab',
+                    name: 'blank',
+                    type: 'boolean',
+                  },
+                ],
+              },
+            ],
+          },
+        },
+        {
+          type: 'image',
+          options: { hotspot: true },
+          fields: [
+            {
+              title: 'Caption',
+              name: 'caption',
+              type: 'string',
+              options: { isHighlighted: true },
+            },
+            {
+              title: 'Alt Text',
+              name: 'alt',
+              type: 'string',
+              validation: (Rule) => Rule.required().warning('Alt text is important for accessibility.'),
+            },
+          ],
+        },
+        {
+          type: 'object',
+          name: 'customEmbed',
+          title: 'Custom Embed',
+          fields: [
+            {
+              title: 'Embed URL',
+              name: 'embedUrl',
+              type: 'url',
+            },
+          ],
+          preview: {
+            select: {
+              title: 'embedUrl',
+            },
+            prepare(selection) {
+              const { title } = selection;
+              return {
+                title: `Embed: ${title}`,
+              };
+            },
+          },
+        },
+      ],
     }),
+    
 
     // Tags for categorization
     defineField({
