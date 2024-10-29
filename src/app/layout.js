@@ -61,6 +61,8 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <head>
       <link rel="sitemap" type="application/xml" href="https://www.epicssolution.com/sitemap.xml" />
+      <meta httpEquiv="Cache-Control" content="public, max-age=31536000, immutable" />
+
         {/* Open Graph Meta Tags */}
         <meta property="og:title" content={metadata.openGraph.title} />
         <meta property="og:description" content={metadata.openGraph.description} />
@@ -92,8 +94,66 @@ export default function RootLayout({ children }) {
           gtag('js', new Date());
           gtag('config', 'G-D50XE9PL55');`}
         </Script>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="last-modified" content={metadata.lastModified} />
+        <link rel="canonical" href={`https://www.epicssolution.com/`} />
+        <meta name="author" content="Epic Solution Team" />
+        <meta name="robots" content="index, follow" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify([
+              {
+                "@context": "https://schema.org",
+                "@type": "Organization",
+                "name": "Epics Solution",
+                "url": "https://www.epicssolution.com",
+                "logo": "https://www.epicssolution.com/logo.png",
+                "sameAs": [
+                  "https://www.facebook.com/epicssolution",
+                  "https://www.linkedin.com/company/epicssolution",
+                  "https://www.youtube.com/channel/epicssolution",
+                  "https://www.instagram.com/epicssolution"
+                ],
+                "description": "Educational websites help students to read informative blogs and enroll in the best online courses related to AI in Mechanical, HVAC, Energy, and Web Development."
+              },
+              {
+                "@context": "https://schema.org",
+                "@type": "WebSite",
+                "name": "Epics Solution",
+                "url": "https://www.epicssolution.com",
+                "potentialAction": {
+                  "@type": "SearchAction",
+                  "target": "https://www.epicssolution.com/search?q={search_term_string}",
+                  "query-input": "required name=search_term_string"
+                }
+              },
+              {
+                "@context": "https://schema.org",
+                "@type": "WebPage",
+                "name": metadata.title.default,
+                "url": metadata.openGraph.url,
+                "description": metadata.description,
+                "breadcrumb": {
+                  "@type": "BreadcrumbList",
+                  "itemListElement": [
+                    {
+                      "@type": "ListItem",
+                      "position": 1,
+                      "name": "Home",
+                      "item": "https://www.epicssolution.com"
+                    },
+                    {
+                      "@type": "ListItem",
+                      "position": 2,
+                      "name": "Courses",
+                      "item": "https://www.epicssolution.com/courses"
+                    }
+                  ]
+                }
+              }
+            ]),
+          }}
+        />
 
       </head>
       <body

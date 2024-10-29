@@ -10,6 +10,8 @@ const Logo = () => {
           src={profileImg} 
           alt="Profile image of the Education Consultant" 
          className="w-full h-auto rounded-full  "
+         loading="lazy"
+
          width={64} 
           height={64} 
            />

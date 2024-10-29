@@ -18,13 +18,13 @@ export default function Artif() {
         <meta property="og:title" content="BEST online courses" />
         <meta property="og:description" content="Educational websites help students gain admission to top online courses and enroll in the best courses." />
         <meta property="og:image" content="https://www.epicssolution.com/social-banner.png" />
-        <meta property="og:url" content="https://www.epicssolution.com/" />
+        <meta property="og:url" content="https://www.epicssolution.com/ai" />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Study Visa Consultant" />
         <meta name="twitter:description" content="Educational websites help students gain admission to top universities and enroll in the best courses." />
         <meta name="twitter:image" content="https://www.epicssolution.com/social-banner.png" />
-        <link rel="canonical" href="https://www.epicssolution.com/" />
+        <link rel="canonical" href="https://www.epicssolution.com/ai" />
         {/* Add Structured Data */}
         <script type="application/ld+json">{`{
           "@context": "https://schema.org",
@@ -34,7 +34,7 @@ export default function Artif() {
           "provider": {
             "@type": "Organization",
             "name": "Epic Solutions",
-            "url": "https://www.epicssolution.com/"
+            "url": "https://www.epicssolution.com/ai"
           }
         }`}</script>
       </Head>

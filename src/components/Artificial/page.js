@@ -62,7 +62,7 @@ const Artificial = () => {
         <title>{metaTitle}</title>
         <meta name="description" content={metaDescription} />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href={`https://www.epicssolution.com/Engineering`} />
+        <link rel="canonical" href={`https://www.epicssolution.com/ai`} />
         <meta name="keywords" content="engineering courses, online learning, Epics Solution" />
 
        
@@ -71,7 +71,7 @@ const Artificial = () => {
         <meta property="og:title" content={metaTitle} />
         <meta property="og:description" content={metaDescription} />
         <meta property="og:image" content={urlFor(firstCourse.image).url()} />
-        <meta property="og:url" content="https://www.epicssolution.com/Engineering" />
+        <meta property="og:url" content="https://www.epicssolution.com/ai" />
         <meta property="og:type" content="website" />
         <meta property="og:locale" content="en_US" />
         <meta property="og:site_name" content="Epics Solution" />
@@ -94,7 +94,7 @@ const Artificial = () => {
               "provider": {
                 "@type": "Organization",
                 "name": "Epics Solution",
-                "url": "https://www.epicssolution.com",
+                "url": "https://www.epicssolution.com/ai",
               },
               "duration": firstCourse.duration,
               "educationalLevel": firstCourse.level,

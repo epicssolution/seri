@@ -1,8 +1,8 @@
 const siteMetadata = {
-  title: 'Best online Courses',
+  title: 'Best online Courses and Blogs |  Use of Artificial Intelligence in Mechanical,HVAC,Energy and web Development',
   author: 'Epics',
   headerTitle: 'Blog',
-  description: 'Educational websites help students gain enroll in the best courses.',
+  description: 'Educational websites help students to  read informative blogs and enroll in the best online courses related to use of Artificial intelligence in Mechanical,HVAC,Energy and web Development',
   language: 'en-us',
   theme: 'dark', // system, dark or light
   siteUrl: 'https://www.epicssolution.com/', // your website URL

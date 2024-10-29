@@ -93,7 +93,7 @@ const Engineering = () => {
               "provider": {
                 "@type": "Organization",
                 "name": "Epics Solution",
-                "url": "https://www.epicssolution.com",
+                "url": "https://www.epicssolution.com/Engineering",
               },
               "duration": firstCourse.duration,
               "educationalLevel": firstCourse.level,
