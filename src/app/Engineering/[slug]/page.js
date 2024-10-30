@@ -91,7 +91,7 @@ export default function BlogPage({ params }) {
     <>
         <Head>
         <meta name="keywords" content={`${blog.title}, AI, Epic Solution, Blog`} />
-        <link rel="canonical" href={`https://www.epicssolution.com/artificialf/${slug}`} />
+        <link rel="canonical" href={`https://www.epicssolution.com/Engineering/${slug}`} />
         <meta name="author" content="Epic Solution Team" />
         <meta name="robots" content="index, follow" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -99,7 +99,7 @@ export default function BlogPage({ params }) {
         {/* Open Graph Tags */}
         <meta property="og:title" content={blog.title} />
         <meta property="og:description" content={blog.description} />
-        <meta property="og:url" content={`https://www.epicssolution.com/artificialf/${slug}`} />
+        <meta property="og:url" content={`https://www.epicssolution.com/Engineering/${slug}`} />
         <meta property="og:image" content={imageUrl} />
         <meta property="og:type" content="article" />
         <meta property="og:site_name" content="Epic Solution Blog" />
@@ -145,7 +145,7 @@ export default function BlogPage({ params }) {
                 "description": "${blog.description}",
                 "mainEntityOfPage": {
                   "@type": "WebPage",
-                  "@id": "https://www.epicssolution.com/artificialf/${slug}"
+                  "@id": "https://www.epicssolution.com/Engineering/${slug}"
                 }
               }
             `,
