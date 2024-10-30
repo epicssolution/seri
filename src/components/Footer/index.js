@@ -16,12 +16,12 @@ const Footer = () => {
 
   return (
     <footer className="mt-16 rounded-2xl bg-dark dark:bg-accentDark/90 m-2 sm:m-10 flex flex-col items-center text-light dark:text-dark">
-      <h3 className="mt-16 font-medium dark:font-bold text-center capitalize text-2xl sm:text-3xl lg:text-4xl px-4">
-       Online Courses | udemy | Courses
+      <h3 className="mt-16 font-medium dark:font-bold text-center capitalize  px-4">
+       Online Courses | Blogs | MEP | HVAC | Web Development | Artificial Intelligence
       </h3>
-      <p className="mt-5 px-4 text-center w-full sm:w-3/5 font-light dark:font-medium text-sm sm:text-base">
-      Educate yourself and lead the word. Enroll in best courses of every field.
-      </p>
+      <h4 className="mt-5 px-4 text-center w-full sm:w-3/5 font-light dark:font-medium text-sm sm:text-base">
+      Educate yourself and lead the word. we help  students to  read informative blogs and enroll in the best online courses related to use of Artificial intelligence in Mechanical,HVAC,Energy and web Development.
+      </h4>
 
       <form
         onSubmit={handleSubmit(onSubmit)}
@@ -41,9 +41,9 @@ const Footer = () => {
       </form>
       <div className="flex items-center mt-8">
       <a href={siteMetadata.linkedin} rel="noopener noreferrer" className="inline-block w-6 h-6 mr-4" aria-label="Reach out to me via LinkedIn" target="_blank"><LinkedinIcon className="hover:scale-125 transition-all ease duration-200" /></a>
-        <a href={siteMetadata.facebook} rel="noopener noreferrer" className="inline-block w-6 h-6 mr-4" aria-label="Reach out to me via Twitter" target="_blank"><FacebookIcon className="hover:scale-125 transition-all ease duration-200" /></a>
-        <a href={siteMetadata.youtube} rel="noopener noreferrer" className="inline-block w-6 h-6 mr-4" aria-label="Check my profile on Github" target="_blank"><YoutubeIcon className="  hover:scale-125 transition-all ease duration-200 dark:fill-light" /></a>
-        <a href={siteMetadata.Instagram} rel="noopener noreferrer" className="inline-block w-6 h-6 mr-4" aria-label="Check my profile on Dribbble" target="_blank"><InstagramIcon className="hover:scale-125 transition-all ease duration-200" /></a>
+        <a href={siteMetadata.facebook} rel="noopener noreferrer" className="inline-block w-6 h-6 mr-4" aria-label="Reach out to me via facebook" target="_blank"><FacebookIcon className="hover:scale-125 transition-all ease duration-200" /></a>
+        <a href={siteMetadata.youtube} rel="noopener noreferrer" className="inline-block w-6 h-6 mr-4" aria-label="Check my profile on youtube" target="_blank"><YoutubeIcon className="  hover:scale-125 transition-all ease duration-200 dark:fill-light" /></a>
+        <a href={siteMetadata.instagram} rel="noopener noreferrer" className="inline-block w-6 h-6 mr-4" aria-label="Check my profile on instagram" target="_blank"><InstagramIcon className="hover:scale-125 transition-all ease duration-200" /></a>
       </div>
 
       <div className="w-full  mt-16 md:mt-24 relative font-medium border-t border-solid border-light py-6 px-8 flex  flex-col md:flex-row items-center justify-between">
@@ -59,7 +59,7 @@ const Footer = () => {
         <div className="text-center">
           Made with &hearts; by{" "}
           <a href={siteMetadata.facebook} className="underline" target="_blank">
-            AGKS
+            Abdul Ghaffar
           </a>
         </div>
       </div>

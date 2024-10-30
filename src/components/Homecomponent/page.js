@@ -82,7 +82,7 @@ const HomePage = () => {
         )}
         
       </article>
-      <div className='w-full lg:w-3/4 p-6 sm:p-8 md:p-12 lg:p-16 flex flex-col items-start justify-center z-0   bg-light dark:bg-dark text-dark dark:text-light'>
+      <div className=' lg:w-3/4 p-6 sm:p-8 md:p-12 lg:p-16 flex flex-col items-start justify-center z-0   bg-light dark:bg-dark text-dark dark:text-light'>
           {blog.tags && blog.tags.length > 0 && (
             <span className='mt-2 text-sm text-gray-300'>{blog.tags[0]}</span>
           )}

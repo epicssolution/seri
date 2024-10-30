@@ -173,9 +173,7 @@ export default function BlogPage({ params }) {
             <h1 className="mt-2 block text-3xl text-center leading-8 font-bold tracking-tight sm:text-4xl">
               {blog.title}
             </h1>
-            <div className="w-full z-10 flex flex-col items-center justify-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-              
-            </div>
+            
             <div className="absolute top-0 left-0 right-0 bottom-0 h-full bg-gray-800/60" />
             {blog.titleImage && (
               <Image

@@ -1,14 +1,13 @@
+import { Suspense } from 'react';
 import dynamic from 'next/dynamic';
 
-// Lazy load components
+// Lazy load components with suspense enabled
 const HomePage = dynamic(() => import('@/components/Homecomponent/page'), {
-  loading: () => <p>Loading Home Page...</p>, // Optional loading fallback
-  ssr: false, // Disable SSR for this component to load only on the client
+  suspense: true, // Enable suspense for better concurrent loading
 });
 
 const Engineering = dynamic(() => import('@/components/engineering/page'), {
-  loading: () => <p>Loading Engineering Section...</p>, // Optional loading fallback
-  ssr: false, // Disable SSR to enable client-side loading
+  suspense: true, // Enable suspense for better concurrent loading
 });
 
 const Page = () => {
@@ -19,20 +18,25 @@ const Page = () => {
         className="min-h-[300px] w-full flex items-center justify-center bg-gray-100"
         aria-label="Home Page Section"
       >
-        <HomePage />
-        
+        <Suspense fallback={<p>Loading Home Page...</p>}>
+          <HomePage />
+        </Suspense>
       </section>
 
       {/* Engineering Section */}
-      <div className="mt-6">
-        {/* Second component */}
-        <div className="flex justify-center align-middle font-semibold text-2xl border-[1px] border-solid border-dark dark:border-light text-black dark:text-light rounded-lg p-4 sticky top-6 max-h-[80vh]" >
-       Engineering Blogs & Courses 
-
+      <div className="flex flex-col items-center w-full mt-6">
+        {/* Header for Engineering Section */}
+        <div className="flex justify-center items-center font-semibold text-2xl border-[1px] border-solid border-dark dark:border-light text-black dark:text-light rounded-lg p-4 max-h-[80vh]">
+          <h1>          Engineering Blogs & Courses
+          </h1>   
         </div>
-       <div className=" mt-6 "> <article  style={{ minHeight: '300px', width: '100%' }}>
-          <Engineering />
-        </article></div>
+
+        {/* Engineering Content */}
+        <article style={{ minHeight: '300px', width: '100%' }}>
+          <Suspense fallback={<p>Loading Engineering Section...</p>}>
+            <Engineering />
+          </Suspense>
+        </article>
       </div>
     </main>
   );

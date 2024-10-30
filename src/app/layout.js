@@ -54,16 +54,12 @@ export const metadata = {
   },
 };
 
-
 export default function RootLayout({ children }) {
-  
   return (
     <html lang="en">
       <head>
       <link rel="sitemap" type="application/xml" href="https://www.epicssolution.com/sitemap.xml" />
       <meta httpEquiv="Cache-Control" content="public, max-age=31536000, immutable" />
-
-        {/* Open Graph Meta Tags */}
         <meta property="og:title" content={metadata.openGraph.title} />
         <meta property="og:description" content={metadata.openGraph.description} />
         <meta property="og:url" content={metadata.openGraph.url} />
@@ -72,90 +68,27 @@ export default function RootLayout({ children }) {
         <meta property="og:updated_time" content={metadata.openGraph.updated_time} />
         <meta property="og:type" content={metadata.openGraph.type} />
         <meta property="og:image" content={metadata.openGraph.images[0]} />
-
-        {/* Additional Meta Tags */}
         <meta name="theme-color" content="#ffffff" /> {/* Define theme color for browsers */}
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="last-modified" content={metadata.openGraph.updated_time} />
-
-
       <meta
           name="google-site-verification"
           content="125c3Cukk3D1INp6HOlRmuvTDPOk-qiR_j30PREvm0I"
         />
-        {/* Google tag (gtag.js) */}
         <Script
           async
           src="https://www.googletagmanager.com/gtag/js?id=G-D50XE9PL55"
         />
         <Script id="gtag-init" strategy="afterInteractive">
           {`window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'G-D50XE9PL55');`}
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-D50XE9PL55');`}
         </Script>
-        <meta name="last-modified" content={metadata.lastModified} />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="canonical" href={`https://www.epicssolution.com/`} />
-        <meta name="author" content="Epic Solution Team" />
-        <meta name="robots" content="index, follow" />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify([
-              {
-                "@context": "https://schema.org",
-                "@type": "Organization",
-                "name": "Epics Solution",
-                "url": "https://www.epicssolution.com",
-                "logo": "https://www.epicssolution.com/logo.png",
-                "sameAs": [
-                  "https://www.facebook.com/epicssolution",
-                  "https://www.linkedin.com/company/epicssolution",
-                  "https://www.youtube.com/channel/epicssolution",
-                  "https://www.instagram.com/epicssolution"
-                ],
-                "description": "Educational websites help students to read informative blogs and enroll in the best online courses related to AI in Mechanical, HVAC, Energy, and Web Development."
-              },
-              {
-                "@context": "https://schema.org",
-                "@type": "WebSite",
-                "name": "Epics Solution",
-                "url": "https://www.epicssolution.com",
-                "potentialAction": {
-                  "@type": "SearchAction",
-                  "target": "https://www.epicssolution.com/search?q={search_term_string}",
-                  "query-input": "required name=search_term_string"
-                }
-              },
-              {
-                "@context": "https://schema.org",
-                "@type": "WebPage",
-                "name": metadata.title.default,
-                "url": metadata.openGraph.url,
-                "description": metadata.description,
-                "breadcrumb": {
-                  "@type": "BreadcrumbList",
-                  "itemListElement": [
-                    {
-                      "@type": "ListItem",
-                      "position": 1,
-                      "name": "Home",
-                      "item": "https://www.epicssolution.com"
-                    },
-                    {
-                      "@type": "ListItem",
-                      "position": 2,
-                      "name": "Courses",
-                      "item": "https://www.epicssolution.com/courses"
-                    }
-                  ]
-                }
-              }
-            ]),
-          }}
-        />
-
       </head>
+
       <body
         className={cx(
           inter.variable,
@@ -174,7 +107,7 @@ export default function RootLayout({ children }) {
 
         {/* Header and Footer are included around children */}
         <Header />
-        <main >{children}</main>
+        <main>{children}</main>
         <Footer />
       </body>
     </html>

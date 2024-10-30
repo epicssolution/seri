@@ -7,15 +7,17 @@ const Logo = () => {
     <Link href="/" className="flex items-center text-dark" >
       <div  className="w-16 rounded-full overflow-hidden border border-solid  border-dark mr-4 ">
         <Image 
-          src={profileImg} 
-          alt="Profile image of the Education Consultant" 
+         src={profileImg} 
+         alt="online courses & blogs" 
+         title="online courses & blogs" 
          className="w-full h-auto rounded-full  "
          loading="lazy"
-
          width={64} 
           height={64} 
            />
       </div>
+      <h1>Epics Solution</h1>
+
      
     </Link>
   );
