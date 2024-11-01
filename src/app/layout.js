@@ -79,7 +79,6 @@ export default function RootLayout({ children }) {
     gtag('config', 'G-D50XE9PL55');`}
         </Script>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="canonical" href={typeof window !== "undefined" ? window.location.href : metadata.openGraph.url} />
         </head>
 
       <body
