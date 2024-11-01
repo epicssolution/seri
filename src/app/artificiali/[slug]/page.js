@@ -104,7 +104,9 @@ export default function BlogPage({ params }) {
         <meta property="og:title" content={blog.title} />
         <meta property="og:description" content={blog.description} />
         <meta property="og:url" content={`https://www.epicssolution.com/artificiali/${slug}`} />
-        <meta property="og:image" content={imageUrl} />
+        <meta property="og:image" content={imageUrl || 'https://www.epicssolution.com/default-image.jpg'} />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />     
         <meta property="og:type" content="article" />
         <meta property="og:site_name" content="Epic Solution Blog" />
         <meta property="og:locale" content="en_US" /> {/* Added og:locale */}
