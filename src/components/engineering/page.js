@@ -24,7 +24,11 @@ const Engineering = () => {
             href,
             tags,
             content,
-            publishedAt
+            publishedAt,  
+            heading1,
+            heading2,     
+            heading3,    
+            heading4
           }
         `;
         const result = await client.fetch(query);
