@@ -61,52 +61,7 @@ const Engineering = () => {
   return (
     <main className="w-full mt-16 sm:mt-24 md:mt-32 px-5 sm:px-10 md:px-24 lg:px-32 flex flex-col items-center justify-center">
       {/* Dynamic Open Graph meta tags */}
-      <Head>
-        <title>{metaTitle}</title>
-        <meta name="description" content={metaDescription} />
-        <meta name="robots" content="index, follow" />
-        <link rel="canonical" href={`https://www.epicssolution.com/Engineering`} />
-        <meta name="keywords" content="engineering courses, online learning, Epics Solution" />
-
-       
-
-        {/* Refined Open Graph Tags */}
-        <meta property="og:title" content={metaTitle} />
-        <meta property="og:description" content={metaDescription} />
-        <meta property="og:image" content={urlFor(firstCourse.image).url()} />
-        <meta property="og:url" content="https://www.epicssolution.com/Engineering" />
-        <meta property="og:type" content="website" />
-        <meta property="og:locale" content="en_US" />
-        <meta property="og:site_name" content="Epics Solution" />
-
-        {/* Twitter Card Tags */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={metaTitle} />
-        <meta name="twitter:description" content={metaDescription} />
-        <meta name="twitter:image" content={urlFor(firstCourse.image).url()} />
-
-        {/* Enhanced Structured Data for SEO */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Course",
-              "name": firstCourse.title,
-              "description": firstCourse.description,
-              "provider": {
-                "@type": "Organization",
-                "name": "Epics Solution",
-                "url": "https://www.epicssolution.com/Engineering",
-              },
-              "duration": firstCourse.duration,
-              "educationalLevel": firstCourse.level,
-              "audience": firstCourse.audience,
-            }),
-          }}
-        />
-      </Head>
-
+      
       {/* Grid layout for displaying courses */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {universities.map((uni) => (
