@@ -60,14 +60,7 @@ export default function RootLayout({ children }) {
       <head>
       <link rel="sitemap" type="application/xml" href="https://www.epicssolution.com/sitemap.xml" />
       <meta httpEquiv="Cache-Control" content="public, max-age=31536000, immutable" />
-        <meta property="og:title" content={metadata.openGraph.title} />
-        <meta property="og:description" content={metadata.openGraph.description} />
-        <meta property="og:url" content={metadata.openGraph.url} />
-        <meta property="og:site_name" content={metadata.openGraph.siteName} />
-        <meta property="og:locale" content={metadata.openGraph.locale} />
-        <meta property="og:updated_time" content={metadata.openGraph.updated_time} />
-        <meta property="og:type" content={metadata.openGraph.type} />
-        <meta property="og:image" content={metadata.openGraph.images[0]} />
+ 
         <meta name="theme-color" content="#ffffff" /> {/* Define theme color for browsers */}
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="last-modified" content={metadata.openGraph.updated_time} />
@@ -86,8 +79,8 @@ export default function RootLayout({ children }) {
     gtag('config', 'G-D50XE9PL55');`}
         </Script>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="canonical" href={`https://www.epicssolution.com/`} />
-      </head>
+        <link rel="canonical" href={typeof window !== "undefined" ? window.location.href : metadata.openGraph.url} />
+        </head>
 
       <body
         className={cx(
