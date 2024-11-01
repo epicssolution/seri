@@ -103,7 +103,7 @@ export default function BlogPage({ params }) {
         {/* Open Graph Tags */}
         <meta property="og:title" content={blog.title} />
         <meta property="og:description" content={blog.description} />
-        <meta property="og:url" content={`https://www.epicssolution.com/marketing/artificialf/${slug}`} />
+        <meta property="og:url" content={`https://www.epicssolution.com/marketing/${slug}`} />
         <meta property="og:image" content={imageUrl || 'https://www.epicssolution.com/default-image.jpg'} />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />        
