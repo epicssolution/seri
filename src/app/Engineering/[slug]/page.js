@@ -1,5 +1,3 @@
-"use client"; // Add this at the top
-
 import BlogDetails from "@/components/blogdetail/page";
 import siteMetadata from "@/utils/siteMetaData";
 import { client } from "@/sanity/lib/client";
@@ -8,195 +6,137 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import VisitCourseButton from "@/components/buttons/page";
 import { PortableText } from "next-sanity";
-import Head from "next/head";
-import Link from "next/link";
-import { useState, useEffect } from "react"; // For client-side state management
 
-// Define the fullBlog object structure
-export const fullBlog = {
-  currentSlug: '',
-  title: '',
-  content: null,
-  titleImage: null,
-  description: '',
-  href: ''
-};
-
-// Blog Page Component
-export default function BlogPage({ params }) {
+// Use the Metadata API for handling meta tags and SEO
+export async function generateMetadata({ params }) {
   const { slug } = params;
 
-  // State for blog data
-  const [blog, setBlog] = useState(fullBlog);
-  const [loading, setLoading] = useState(true);
+  // Fetch the blog data from Sanity for the "dev" type
+  const query = `
+    *[_type == "Eng" && slug.current == $slug][0]{
+      title,
+      description,
+      "slug": slug.current,
+      image,
+      publishedAt
+    }
+  `;
 
-  // Fetch blog data on mount
-  useEffect(() => {
-    const fetchBlogData = async () => {
-      const query = `
-        *[_type == "Eng" && slug.current == $slug][0]{
-          title,
-          description,
-          "currentSlug": slug.current,
-          image,
-          publishedAt,
-          href,
-          content,
-          heading1,
-          heading2,
-          heading3,
-          heading4
-        }
-      `;
+  const blog = await client.fetch(query, { slug });
 
-      const blogData = await client.fetch(query, { slug });
+  if (!blog) {
+    notFound();
+    return null;
+  }
 
-      if (blogData) {
-        setBlog({
-          ...fullBlog,
-          currentSlug: blogData.currentSlug,
-          title: blogData.title,
-          content: blogData.content,
-          titleImage: blogData.image,
-          description: blogData.description,
-          href: blogData.href
-        });
-      } else {
-        notFound();
-      }
+  // Generate the image URL or fallback to a social banner image
+  const imageUrl = blog.image ? urlFor(blog.image).url() : siteMetadata.socialBanner;
 
-      setLoading(false);
-    };
+  return {
+    title: blog.title,
+    description: blog.description,
+    openGraph: {
+      title: blog.title,
+      description: blog.description,
+      url: `https://www.epicssolution.com/Engineering/${slug}`,
+      images: imageUrl ? [{ url: imageUrl }] : [],
+      type: 'article',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: blog.title,
+      description: blog.description,
+      images: imageUrl ? [imageUrl] : [],
+    },
+    other: {
+      'pinterest:title': blog.title,
+      'pinterest:description': blog.description,
+      'pinterest:image': imageUrl,
+    },
+  };
+}
 
-    fetchBlogData();
-  }, [slug]);
+export default async function BlogPage({ params }) {
+  const { slug } = params;
 
-  // Generate the image URL for use in JSON-LD
-  const imageUrl = blog.titleImage ? urlFor(blog.titleImage).url() : siteMetadata.socialBanner;
+  // Fetch the blog data from Sanity
+  const query = `
+    *[_type == "Eng" && slug.current == $slug][0]{
+      title,
+      description,
+      "slug": slug.current,
+      image,
+      publishedAt,
+      href,
+      content,
+      heading1,
+      heading2,
+      heading3,
+      heading4
+    }
+  `;
+
+  const blog = await client.fetch(query, { slug });
+
+  if (!blog) {
+    notFound();
+    return null;
+  }
 
   // Extract headings for Table of Contents (TOC)
   const headings = [];
+
+  if (blog.heading1) {
+    headings.push({ text: blog.heading1, slug: "heading-1", level: "1" });
+  }
+  if (blog.heading2) {
+    headings.push({ text: blog.heading2, slug: "heading-2", level: "2" });
+  }
+  if (blog.heading3) {
+    headings.push({ text: blog.heading3, slug: "heading-3", level: "3" });
+  }
+  if (blog.heading4) {
+    headings.push({ text: blog.heading4, slug: "heading-4", level: "4" });
+  }
+
   if (blog.content && Array.isArray(blog.content)) {
-    blog.content.forEach((block, index) => {
-      if (block.style && block.style.match(/^h[1-4]$/)) {
-        const level = block.style.replace('h', '');
-        const text = block.children.map((child) => child.text).join("");
+    blog.content
+      .filter((block) => block.style && block.style.match(/^h[1-6]$/))
+      .forEach((heading, index) => {
+        const level = heading.style.replace('h', ''); // Extract the heading level
+        const text = heading.children.map((child) => child.text).join("");
         headings.push({
           text,
           slug: `content-heading-${index}`,
-          level
+          level,
         });
-      }
-    });
+      });
   }
 
   // Render the page content
   return (
-    <>
-        <Head>
-        <meta name="keywords" content={`${blog.title}, AI, Epic Solution, Blog`} />
-        <link rel="canonical" href={`https://www.epicssolution.com/Engineering/${slug}`} />
-        <meta name="author" content="Epic Solution Team" />
-        <meta name="robots" content="index, follow" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-        {/* Open Graph Tags */}
-        <meta property="og:title" content={blog.title} />
-        <meta property="og:description" content={blog.description} />
-        <meta property="og:url" content={`https://www.epicssolution.com/Engineering/${slug}`} />
-        <meta property="og:image" content={imageUrl || 'https://www.epicssolution.com/default-image.jpg'} />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />  
-        <meta property="og:type" content="article" />
-        <meta property="og:site_name" content="Epic Solution Blog" />
-        <meta property="og:locale" content="en_US" /> {/* Added og:locale */}
-        <meta property="og:updated_time" content={new Date().toISOString()} /> {/* Added og:updated_time */}
-
-
-        {/* Twitter Card Tags */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={blog.title} />
-        <meta name="twitter:description" content={blog.description} />
-        <meta name="twitter:image" content={imageUrl} />
-
-        {/* Pinterest Tags */}
-        <meta property="pinterest:title" content={blog.title} />
-        <meta property="pinterest:description" content={blog.description} />
-        <meta property="pinterest:image" content={imageUrl} />
-
-        {/* Structured Data (JSON-LD) */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: `
-              {
-                "@context": "https://schema.org",
-                "@type": "BlogPosting",
-                "headline": "${blog.title}",
-                "image": "${imageUrl}",
-                "author": {
-                  "@type": "Person",
-                  "name": "Epic Solution Team"
-                },
-                "publisher": {
-                  "@type": "Organization",
-                  "name": "Epic Solution",
-                  "logo": {
-                    "@type": "ImageObject",
-                    "url": "${siteMetadata.logo}"
-                  }
-                },
-                "datePublished": "${blog.publishedAt}",
-                "dateModified": "${new Date().toISOString()}",
-                "description": "${blog.description}",
-                "mainEntityOfPage": {
-                  "@type": "WebPage",
-                  "@id": "https://www.epicssolution.com/Engineering/${slug}"
-                }
-              }
-            `,
-          }}
-        />
-      </Head>
-
-      <div className="flex justify-center align-top mt-7 mb-7  border-dark dark:border-light text-black dark:text-light max-w-screen-lg mx-auto">
-      <h1>
-        <span className="block text-base text-center text-primary font-semibold tracking-wide uppercase">
-          Abdul Ghaffar Khan - Blog
-        </span>
-        <span className="mt-2 block text-3xl text-center leading-8 font-bold tracking-tight sm:text-4xl">
-          {blog.title}
-        </span>
-      </h1>
-      
+    <article>
+      <div className="mb-8 text-center relative w-full h-[70vh] bg-gray-800">
+        <div className="w-full z-10 flex flex-col items-center justify-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+          <h1 className="inline-block mt-6 font-semibold capitalize text-white text-2xl md:text-2xl lg:text-2xl !leading-normal relative w-5/6">
+            <VisitCourseButton href={blog.href} />
+          </h1>
+        </div>
+        <div className="absolute top-0 left-0 right-0 bottom-0 h-full bg-gray-800/60" />
+        {blog.image && (
+          <Image
+            src={urlFor(blog.image).url()}
+            alt={blog.title}
+            fill
+            className="aspect-square w-full h-full object-cover object-center"
+            priority
+            sizes="100vw"
+          />
+        )}
       </div>
 
-      {loading ? (
-        <div className="loading-skeleton" aria-busy="true">Loading...</div>
-      ) : (
-        <article>
-          <div className="mb-8 text-center relative w-full h-[70vh] bg-gray-800">
-            <h1 className="mt-2 block text-3xl text-center leading-8 font-bold tracking-tight sm:text-4xl">
-              {blog.title}
-            </h1>
-            
-            <div className="absolute top-0 left-0 right-0 bottom-0 h-full bg-gray-800/60" />
-            {blog.titleImage && (
-              <Image
-                src={urlFor(blog.titleImage).url()}
-                alt={blog.title}
-                fill
-                className="aspect-square w-full h-full object-cover object-center"
-                sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                loading="lazy"
-                aria-hidden="true"
-                quality={100}
-              />
-            )}
-          </div>
+      <BlogDetails blog={blog} slug={params.slug} toc={headings} />
 
-          <BlogDetails blog={blog} slug={params.slug} toc={headings} />
-          
       <div className="grid grid-cols-12 gap-y-8 lg:gap-8 sxl:gap-16 mt-8 px-5 md:px-10">
         <div className="col-span-12 lg:col-span-4">
           <details
@@ -220,6 +160,16 @@ export default function BlogPage({ params }) {
                                   flex items-center justify-start
                                   hover:text-blue-500`}
                     >
+                      {heading.level === "3" && (
+                        <span className="flex w-1 h-1 rounded-full bg-dark dark:bg-light mr-2">
+                          &nbsp;
+                        </span>
+                      )}
+                      {heading.level === "4" && (
+                        <span className="flex w-1 h-1 rounded-full bg-dark dark:bg-light mr-3">
+                          &nbsp;
+                        </span>
+                      )}
                       <span className="hover:underline">{heading.text}</span>
                     </a>
                   </li>
@@ -238,8 +188,6 @@ export default function BlogPage({ params }) {
           )}
         </div>
       </div>
-        </article>
-      )}
-    </>
+    </article>
   );
 }
