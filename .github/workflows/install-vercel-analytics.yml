@@ -1,0 +1,31 @@
+name: Install Vercel Analytics
+
+on:
+  push:
+    branches: [main]  # Runs on push to the main branch
+  pull_request:
+    branches: [main]  # Runs on PRs to the main branch
+
+jobs:
+  install-vercel-analytics:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2  # Checks out your repository
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'  # Specify the Node.js version
+
+      - name: Install Vercel Analytics
+        run: npm install @vercel/analytics  # Install the @vercel/analytics package
+
+      - name: Commit package changes
+        run: |
+          git config --local user.name "GitHub Actions"
+          git config --local user.email "actions@github.com"
+          git add package.json package-lock.json
+          git commit -m "Install @vercel/analytics"
+          git push origin main
